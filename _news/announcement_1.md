@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-First [paper](https://arxiv.org/abs/2009.04806) accepted to ICML 2021.
+First [paper](https://arxiv.org/abs/2009.04806) accepted at ICML 2021.

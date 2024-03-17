@@ -34,13 +34,17 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 
 social: true  # includes social icons at the bottom of the page
 ---
+I am a CS graduate student currently working with [Richard Zemel](http://www.cs.toronto.edu/~zemel/inquiry/home.php) at the University of Toronto. 
+My undergraduate degree (B.A.Sc. in Engineering Science, robotics specialization) was also completed here.
 
-Welcome to my personal research website! I am a MSc-CS candidate advised by [Richard Zemel](http://www.cs.toronto.edu/~zemel/inquiry/home.php) at the University of Toronto. My undergraduate BASc in Engineering Science degree was also completed here.
+I am still in the early stages of my research career, so I'm frequently interested by new topics that I come across -- interesting models, generaliazation and statistical methods. So far, my work has been in vision, generative models, representation learning and learning in low-data regimes.
 
-My work thus far has been in representation learning, specifically, generative models to capture interesting visual features for downstream visual understanding and few-shot tasks. Otherwise, I have been periodically interested in self-supervised learning, optimization phenomena, score-based generative models, implicit functions and some convex optimization. I also have an unactioned curiosity on the impact of social media recommender systems on misinformation and our capacity for societal discourse.
+Looking forward, I hope to work on representation and transfer learning. I believe that many phenomena are interrelated, and that there is work to be done on using unlabelled, loosely-aligned data to solve complex problems. 
+I'm interested in learning about statistical methods to characterize this and how we can learn structured models and representations, as well as relaxing the rigid problem-dataset pairing that is sometimes upheld.
 
-When not trying to make models, or myself, learn something useful about the world, I enjoy cooking, reading manga, going to the gym or a light jog somewhere. 
+When not trying to fix experiments, I like to work out, run and (try to) host dinner parties for my roommates and close friends.
 
 Feel free to contact me at **alexw [at] cs.toronto.edu**
+
 
 

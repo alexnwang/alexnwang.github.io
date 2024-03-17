@@ -1,5 +1,15 @@
----
----
+
+@InProceedings{MetaLearn BatchNorm,
+  abbr=       {NeurIPSw},
+
+  title = 	 {Studying BatchNorm Learning Rate Decay on Meta-Learning Inner-Loop Adaptation},
+  author =       {Wang*, Alexander and Leung*, Gary and Doubov*, Sasha},
+  booktitle = 	 {MetaLearn Workshop, Neural Information Processing Systems},
+  year = 	 {2021},
+  pdf = 	 {https://openreview.net/pdf?id=k9l1KkV4eQc},
+  url = 	 {https://openreview.net/forum?id=k9l1KkV4eQc},
+  abstract = 	 {Meta-learning for few-shot classification has been challenged on its effectiveness compared to simpler pretraining methods and the validity of its claim of "learning to learn". Recent work has suggested that MAML-based models do not perform "rapid-learning" in the inner-loop but reuse features by only adapting the final linear layer. Separately, BatchNorm, a near ubiquitous inclusion in model architectures, has been shown to have an implicit learning rate decay effect on the preceding layers of a network. We study the impact of BatchNorm's implicit learning rate decay on feature reuse in meta-learning methods and find that counteracting it increases change in intermediate layers during adaptation. We also find that counteracting this learning rate decay sometimes improves performance on few-shot classification tasks.},
+}
 
 @InProceedings{SketchEmbedNet,
   abbr=       {ICML},
@@ -7,7 +17,7 @@
   code=       {https://github.com/alexnwang/SketchEmbedNet-public},
 
   title = 	 {SketchEmbedNet: Learning Novel Concepts by Imitating Drawings},
-  author =       {Alexander Wang, Mengye Ren and Richard Zemel},
+  author =       {Wang*, Alexander and Ren*, Mengye and Zemel, Richard},
   booktitle = 	 {Proceedings of the 38th International Conference on Machine Learning},
   pages = 	 {10870--10881},
   year = 	 {2021},
@@ -21,11 +31,3 @@
   abstract = 	 {Sketch drawings capture the salient information of visual concepts. Previous work has shown that neural networks are capable of producing sketches of natural objects drawn from a small number of classes. While earlier approaches focus on generation quality or retrieval, we explore properties of image representations learned by training a model to produce sketches of images. We show that this generative, class-agnostic model produces informative embeddings of images from novel examples, classes, and even novel datasets in a few-shot setting. Additionally, we find that these learned representations exhibit interesting structure and compositionality.}
 }
 
-@book{przibram1967letters,
-  bibtex_show={true},
-  title={Letters on wave mechanics},
-  author={Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year={1967},
-  publisher={Vision},
-  preview={wave-mechanics.gif}
-}
