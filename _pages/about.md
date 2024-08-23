@@ -41,6 +41,6 @@ Recently, my work is focused on:
 - Unsupervised visual representation learning using minimally curated data -- specifically first-person, long-form and multi-object videos with no obvious subject, foreground, or background.
 - The impact of architectural elements in ViTs like patchification, non-spatial tokens and positional embeddings and their effect on learned representations.
 
-Looking ahead, I'd also like to explore the limits of video benchmarks and what they may, or may not, be telling us about our video representations. Finally, I'm interested in the use of 3D and video understanding in reasoning with large pretrained language models.
+Looking ahead, I'd also like to explore the limits of video benchmarks and what they may, or may not, be telling us about our video representations. Finally, I'm interested in the use of 3D and video understanding in reasoning with large pretrained language models. Most recently, I'm wondering if semantic understanding can be separate and composable with spatial reasoning learning.
 
 Feel free to contact me at **anw2067 [at] cims.nyu.edu**
