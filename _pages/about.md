@@ -28,21 +28,19 @@ profile:
   align: right
   image: prof_pic_2.jpg
 
-news: false  # includes a list of news items
+news: false # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 
-social: true  # includes social icons at the bottom of the page
+social: true # includes social icons at the bottom of the page
 ---
 
 I'm a second year Ph.D. student in the [CILVR](https://wp.nyu.edu/cilvr/) lab advised by [Mengye Ren](https://mengyeren.com/) at New York University. My research is supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. I obtained my M.Sc. in Computer Science advised by [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) from the University of Toronto.
 
 Recently, my work is focused on:
-*  Unsupervised visual representation learning using minimally curated data -- specifically first-person, long-form and multi-object videos with no obvious subject, foreground, or background.
-*  The impact of architectural elements in ViTs like patchification, non-spatial tokens and positional embeddings and their effect on learned representations.
+
+- Unsupervised visual representation learning using minimally curated data -- specifically first-person, long-form and multi-object videos with no obvious subject, foreground, or background.
+- The impact of architectural elements in ViTs like patchification, non-spatial tokens and positional embeddings and their effect on learned representations.
 
 Looking ahead, I'd also like to explore the limits of video benchmarks and what they may, or may not, be telling us about our video representations. Finally, I'm interested in the use of 3D and video understanding in reasoning with large pretrained language models.
 
 Feel free to contact me at **anw2067 [at] cims.nyu.edu**
-
-
-
