@@ -34,13 +34,16 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I'm a second year Ph.D. student in the [CILVR](https://wp.nyu.edu/cilvr/) lab advised by [Mengye Ren](https://mengyeren.com/) at New York University. My research is supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. I obtained my M.Sc. in Computer Science advised by [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) from the University of Toronto.
+I'm a third year Ph.D. student in the [CILVR](https://wp.nyu.edu/cilvr/) lab advised by [Mengye Ren](https://mengyeren.com/) at New York University. My research is supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. I obtained my M.Sc. in Computer Science advised by [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) from the University of Toronto.
 
-Recently, my work is focused on:
+My research is focused on vision-centric machine learning. In particular, I am interested in:
+* **Self-supervised representation learning**\
+  How single-subject (iconic) datasets like ImageNet have influenced architectures, augmentation techniques, learned representations and ultimately the ability to learn from dense, real-world image and video data?
+* **Impact on on large-scale vision**\
+  How these iconic representations and training methods influence large-scale multimodal and vision models? Alternatively, can a strong semantic model like DINOv2 support the training of more general, generative vision models?
+* **Learning from synthetic data**\
+  How synthetic data can contribute to visual understanding, particularly the distinction between learning effective visual features vs. real-world concepts and classes using generated images?
 
-- Unsupervised visual representation learning using minimally curated data -- specifically first-person, long-form and multi-object videos with no obvious subject, foreground, or background.
-- The impact of architectural elements in ViTs like patchification, non-spatial tokens and positional embeddings and their effect on learned representations.
-
-Looking ahead, I'd also like to explore the limits of video benchmarks and what they may, or may not, be telling us about our video representations. Finally, I'm interested in the use of 3D and video understanding in reasoning with large pretrained language models. Most recently, I'm wondering if semantic understanding can be separate and composable with spatial reasoning learning.
+Looking ahead, I believer there may be inherent limitations to SSL methods stemming from their development around ImageNet data. However, I believe these models and their representations will serve as a strong foundation upon which to build large-scale generative vision models.
 
 Feel free to contact me at **anw2067 [at] cims.nyu.edu**
