@@ -42,8 +42,11 @@ My research is focused on vision-centric machine learning. In particular, I am i
 * **Impact on on large-scale vision**\
   How these iconic representations and training methods influence large-scale multimodal and vision models? Alternatively, can a strong semantic model like DINOv2 support the training of more general, generative vision models?
 * **Learning from synthetic data**\
-  How synthetic data can contribute to visual understanding, particularly the distinction between learning effective visual features vs. real-world concepts and classes using generated images?
+  How synthetic data can contribute to visual understanding? If we hope to learn from generated simulations, this will be very important!
 
 Looking ahead, I believer there may be inherent limitations to SSL methods stemming from their development around ImageNet data. However, I believe these models and their representations will serve as a strong foundation upon which to build large-scale generative vision models.
+
+Otherwise in my free time, I like to:\
+host dinner parties, make pourover coffee, [watch movies with friends](https://chill-flat-b3e.notion.site/7bff3a7dd0f64726b092cae6c7bfb150?v=21b1ac1e12824c39b6e731967964c5f9) and practice (olympic) weightlifting.
 
 Feel free to contact me at **anw2067 [at] cims.nyu.edu**
