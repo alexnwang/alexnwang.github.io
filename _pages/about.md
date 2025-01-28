@@ -28,25 +28,23 @@ profile:
   align: right
   image: prof_pic_2.jpg
 
-news: false # includes a list of news items
+news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 
 social: true # includes social icons at the bottom of the page
 ---
 
-I'm a third year Ph.D. student in the [CILVR](https://wp.nyu.edu/cilvr/) lab advised by [Mengye Ren](https://mengyeren.com/) at New York University. My research is supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. I obtained my M.Sc. in Computer Science advised by [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) from the University of Toronto.
+I'm a third year Ph.D. student in [CILVR](https://wp.nyu.edu/cilvr/) advised by [Mengye Ren](https://mengyeren.com/) at NYU. I did my M.Sc. with [Rich Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) at University of Toronto. I am supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. 
 
-My research is focused on vision-centric machine learning. In particular, I am interested in:
-* **Self-supervised representation learning**\
-  How single-subject (iconic) datasets like ImageNet have influenced architectures, augmentation techniques, learned representations and ultimately the ability to learn from dense, real-world image and video data?
-* **Impact on on large-scale vision**\
-  How these iconic representations and training methods influence large-scale multimodal and vision models? Alternatively, can a strong semantic model like DINOv2 support the training of more general, generative vision models?
-* **Learning from synthetic data**\
-  How synthetic data can contribute to visual understanding? If we hope to learn from generated simulations, this will be very important!
+I'm interested in intelligent, video generation models. Through generations conditioned on prior frames, I aim to define and measure a notion of visual intelligence and reasoning.
 
-Looking ahead, I believer there may be inherent limitations to SSL methods stemming from their development around ImageNet data. However, I believe these models and their representations will serve as a strong foundation upon which to build large-scale generative vision models.
+My current research focuses on:
+* Leveraging existing discriminative models and pretrained representations to improve the semantic content of generated videos
+* Constructing a notion of visual reasoning by measuring generation semantics in response to (non-textual) changes in input context 
 
-Otherwise in my free time, I like to:\
+Previously, my work focused on representation learning, for which I am interested in new evaluation methods utilizing generative (text or image) responses.
+
+When not working, I like to:\
 host dinner parties, make pourover coffee, [watch movies with friends](https://chill-flat-b3e.notion.site/7bff3a7dd0f64726b092cae6c7bfb150?v=21b1ac1e12824c39b6e731967964c5f9) and practice (olympic) weightlifting.
 
-Feel free to contact me at **anw2067 [at] cims.nyu.edu**
+Feel free to reach to me at **anw2067 [at] cims.nyu.edu**
