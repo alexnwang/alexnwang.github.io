@@ -34,17 +34,19 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I'm a third year Ph.D. student in [CILVR](https://wp.nyu.edu/cilvr/) advised by [Mengye Ren](https://mengyeren.com/) at NYU. I did my M.Sc. with [Rich Zemel](https://www.cs.columbia.edu/~zemel/) and B.A.Sc in [Engineering Science](https://engsci.utoronto.ca/) at University of Toronto. I am supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/BellandPostgrad-BelletSuperieures_eng.asp) scholarship. 
+Hello! I'm a fourth year PhD in [CILVR](https://wp.nyu.edu/cilvr/) at NYU. \\
+I'm fortunate to be advised by [Pavel Izmailov](https://izmailovpavel.github.io/) and to collaborate with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
 
-I'm interested in intelligent, video generation models. Through generations conditioned on prior frames, I aim to define and measure a notion of visual intelligence and reasoning.
+My research interests lie in visual generation and representation learning to support planning, reasoning and other robotics tasks.
+Some specifics include:
+* How to plan for complex robots in real-life environments using world models.
+* Building new quantitative metrics to improve generative world models for robotics tasks.
+* Reducing compute demands of generative world models to enable real-time planning.
 
-My current research focuses on:
-* Leveraging existing discriminative models and pretrained representations to improve the semantic content of generated videos
-* Constructing a notion of visual reasoning by measuring generation semantics in response to (non-textual) changes in input context 
+Previously, my work focused on learning representations from video data.
 
-Previously, my work focused on representation learning, for which I am interested in new evaluation methods utilizing generative (text or image) responses.
-
-When not working, I like to:\
-host dinner parties, make pourover coffee, [watch movies with friends](https://chill-flat-b3e.notion.site/7bff3a7dd0f64726b092cae6c7bfb150?v=21b1ac1e12824c39b6e731967964c5f9) and practice (olympic) weightlifting.
+I received my MSc working with [Richard Zemel](https://www.cs.columbia.edu/~zemel/) \\
+and my BASc in Engineering Science (Robotics) from the University of Toronto. \\
+I am supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/cgrsd-besrd_eng.asp) scholarship.
 
 Feel free to reach to me at **anw2067 [at] cims.nyu.edu**
