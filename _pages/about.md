@@ -26,7 +26,7 @@ description: PhD Student in Computer Science at New York University
 
 profile:
   align: right
-  image: prof_pic_2.jpg
+  image: prof_pic_3.jpg
 
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
@@ -34,19 +34,19 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello! I'm a fourth year PhD in [CILVR](https://wp.nyu.edu/cilvr/) at NYU. \\
-I'm fortunate to be advised by [Pavel Izmailov](https://izmailovpavel.github.io/) and to collaborate with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
+Hello! \\
+I'm a 4th year PhD at NYU [CILVR](https://wp.nyu.edu/cilvr/) working with [Pavel Izmailov](https://izmailovpavel.github.io), [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
 
-My research interests lie in visual generation and representation learning to support planning, reasoning and other robotics tasks.
-Some specifics include:
-* How to plan for complex robots in real-life environments using world models.
-* Building new quantitative metrics to improve generative world models for robotics tasks.
-* Reducing compute demands of generative world models to enable real-time planning.
+I'm interested in vision, world models, planning and search. \\
+Some specifics include: 
+* Improving world model efficiency, consistency and structure.
+* Using search to improve high-dimension and long-horizon planning.
 
-Previously, my work focused on learning representations from video data.
+Previously, I worked on visual representation learning, often for videos.
 
-I received my MSc working with [Richard Zemel](https://www.cs.columbia.edu/~zemel/) \\
-and my BASc in Engineering Science (Robotics) from the University of Toronto. \\
-I am supported by the [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/cgrsd-besrd_eng.asp) scholarship.
+I received my Master's working with [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and my BASc in Engineering Science (Robotics) from the University of Toronto. \\
+My work is supported by [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/cgrsd-besrd_eng.asp).
 
-Feel free to reach to me at **anw2067 [at] cims.nyu.edu**
+Feel free to reach to me at **anw2067 [at] nyu.edu**\\
+\\
+I also love to eat, cook, drink coffee (ultralights; pourover, soup), and recently, drink wine.
