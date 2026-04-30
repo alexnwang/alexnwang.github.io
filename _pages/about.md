@@ -37,16 +37,16 @@ announcements:
   limit: 3 # leave blank to include all the news in the `_news` folder
 ---
 
-I'm a 4th year PhD at NYU [CILVR](https://wp.nyu.edu/cilvr/) working with [Pavel Izmailov](https://izmailovpavel.github.io), [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
+I'm a 4th year CS PhD at NYU [CILVR](https://wp.nyu.edu/cilvr/), advised by [Pavel Izmailov](https://izmailovpavel.github.io) and collaborating with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
 
-I'm interested in vision, representations, world models and planning.\\
-Some topics include: 
+I'm interested in vision, representations, world models and planning.
+Specifically:
 * Improving world model efficiency, consistency, and structure.
-* Using search to improve high-dimension and long-horizon planning.
+* Using search to improve high-dimensional and long-horizon planning.
 * Learning from minimally curated, scalable video data.
 
-I received my Master's working with [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and my BASc in Engineering Science (Robotics) from the University of Toronto. My work is supported by [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/cgrsd-besrd_eng.asp).
+I received my Master's working with [Richard Zemel](https://www.cs.columbia.edu/~zemel/) and my BASc in Engineering Science (Robotics), both from the University of Toronto. My work is supported by [NSERC PGS-D](https://www.nserc-crsng.gc.ca/Students-Etudiants/PG-CS/cgrsd-besrd_eng.asp).
 
 Feel free to email me at **anw2067 [at] nyu.edu**, and download my [CV here](/assets/pdf/cv.pdf).
 
-I also love to eat, cook, drink coffee (ultralights; pourover, soup), and more recently, wine.
+I also love to eat, cook, drink coffee (ultralights; pourover, soup), and more recently, drink wine.
