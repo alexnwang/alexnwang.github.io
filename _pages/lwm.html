@@ -1617,11 +1617,27 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       if (el) sections.push({ link: a, el: el });
     }
   });
+  var byId = {};
+  sections.forEach(function(s) { byId[s.el.id] = s; });
+  var takeaway = byId['takeaways'];
+  var bibtex = byId['bibtex'];
   function update() {
-    var y = window.scrollY + 100;
+    var winH = window.innerHeight;
+    var y = window.scrollY + Math.min(160, winH * 0.33);
     var current = sections[0];
     for (var i = 0; i < sections.length; i++) {
-      if (sections[i].el.offsetTop <= y) current = sections[i];
+      var s = sections[i];
+      if (s === takeaway || s === bibtex) continue;
+      if (s.el.offsetTop <= y) current = s;
+    }
+    var doc = document.documentElement;
+    var atBottom = (window.scrollY + winH) >= (doc.scrollHeight - 4);
+    if (bibtex && atBottom) {
+      current = bibtex;
+    } else if (takeaway) {
+      var tr = takeaway.el.getBoundingClientRect();
+      var visible = Math.max(0, Math.min(tr.bottom, winH) - Math.max(tr.top, 0));
+      if (visible > tr.height * 0.5) current = takeaway;
     }
     links.forEach(function(a) { a.classList.remove('active'); });
     if (current) current.link.classList.add('active');
