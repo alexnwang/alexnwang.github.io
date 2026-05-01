@@ -848,16 +848,16 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
     <li><a href="#summary">Summary</a></li>
     <li><a href="#method">Method</a>
       <ul>
-        <li><a href="#waypoints">Waypoint actions</a></li>
-        <li><a href="#policy">Goal-conditioned policy</a></li>
+        <li><a href="#waypoints">High-level Waypoint Actions</a></li>
+        <li><a href="#policy">Goal-Conditioned Policy</a></li>
         <li><a href="#lwm">Lifted World Model</a></li>
       </ul>
     </li>
     <li><a href="#results">Experimental results</a>
       <ul>
-        <li><a href="#policy-results">Goal-conditioned policy</a></li>
-        <li><a href="#planning-results">LWM planning</a></li>
-        <li><a href="#horizons">Varying goal horizons</a></li>
+        <li><a href="#policy-results">Goal-Conditioned Policy</a></li>
+        <li><a href="#planning-results">LWM Planning</a></li>
+        <li><a href="#horizons">Varying Goal Horizons</a></li>
       </ul>
     </li>
     <li><a href="#takeaways">Takeaway</a></li>
@@ -896,31 +896,40 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
   <div class="section" id="summary">
     <h2 class="reveal">Summary</h2>
     <p class="reveal">
-      World models predict future observations from a current observation and an action.
-      For complex embodiments — like a human-like agent — those actions are
-      <strong>high-dimensional, per-joint parameters</strong> that are hard to specify
-      and expensive to plan with. Search-based methods like the Cross-Entropy Method
-      scale poorly with action dimensionality.
+      World models of embodied agents predict future observations conditioned on an
+      action taken by the agent. For complex embodiments such as a human agent, the
+      actions may require specifying the motion for each joint, greatly increasing the
+      dimensionality of the actions. This high-dimensionality makes world models
+      difficult to control manually and expensive to use for search-based planning
+      methods like Cross-Entropy Method (CEM).
     </p>
     <p class="reveal">
-      We train a lightweight policy that maps <strong class="hl">high-level actions</strong>
-      to sequences of low-level joint actions. Composing this policy with a frozen
-      world model produces a <strong class="hl">Lifted World Model (LWM)</strong> that
-      predicts a sequence of future observations from a single high-level action.
+      Our solution to this problem is to <strong>lift</strong> the world model to a higher
+      level of abstraction. We train a lightweight policy to map a high-level action
+      to sequences of low-level actions. Composing this policy with a frozen world
+      model creates a <strong>Lifted World Model</strong> (LWM) that predicts future
+      observations from a single high-level action. This lifting reduces the
+      dimensionality and length of action sequences without changing the world model
+      itself.
     </p>
     <p class="reveal">
-      For a human-like embodiment, we instantiate the high-level action space as a small
-      set of <strong class="hl">2D waypoints</strong> annotated on the current frame —
-      one per leaf joint (<span class="wp-pelvis">pelvis</span>, <span class="wp-head">head</span>,
-      <span class="wp-left-hand">left-hand</span>, <span class="wp-right-hand">right-hand</span>).
-      Waypoints are low-dimensional, visually interpretable, and easy to specify
-      manually or to search over.
+      For an egocentric, embodied agent, we introduce <strong>waypoints</strong> as
+      high-level actions. Each waypoint is a 2D projection of a 3D goal position
+      onto the current observation and is specified for each leaf joint of the
+      embodiment: the <span class="wp-pelvis">pelvis</span>,
+      <span class="wp-head">head</span>, <span class="wp-left-hand">left-hand</span>,
+      and <span class="wp-right-hand">right-hand</span>. Importantly, waypoints are
+      interpretable, low-dimensional, easy to specify and easy to search over.
     </p>
     <p class="reveal">
-      Search-based planning in this lifted action space reaches solutions
-      <strong>3.8&times; closer to the goal</strong> in mean joint error than searching
-      directly in the low-level joint space — at lower compute, and across
-      goal horizons well beyond the policy's training distribution.
+      First, we explore the impact of goal-conditioning our policy using waypoints
+      over goal-observations. Then, we combine our policy with a PEVA world model and
+      perform planning for an embodied human agent. Finally, we find that planning
+      with an LWM reduces mean-joint error (MJE) by <strong>3.8&times;</strong>
+      compared to planning in low-level joint space and performs better at lower
+      compute and across longer goal horizons. For experiments on waypoint
+      visibility, ablations using 3D waypoints, decomposing action generation, as
+      well as planning with 3D waypoints and in unseen environments, see our paper.
     </p>
 
     <div class="carousel reveal" id="lwm-carousel">
@@ -950,8 +959,11 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
       <div class="carousel-caption" id="lwm-carousel-caption">
         <strong>Fig. 1: Lifted World Model overview.</strong>
-        Input → policy → low-level actions → frozen low-level world model → future
-        observations, all visible together.
+        A high-level action <em>a</em><sup>HL</sup> is mapped by the policy into a
+        sequence of low-level joint actions, which the frozen low-level world model
+        rolls out into a sequence of observations. The final observation
+        <em>o<sub>t+T</sub></em> is the output of the LWM. Meshes are shown for
+        visualization only.
       </div>
     </div>
   </div>
@@ -962,22 +974,26 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
   <div class="section" id="method">
     <h2 class="reveal">Method</h2>
     <p class="reveal">
-      We lift a low-level world model with three components: a high-level waypoint
-      action space, a waypoint-conditioned policy that decodes joint actions,
-      and the composed Lifted World Model that we use for search-based planning.
+      Here we introduce the three components of our method: a high-level waypoint
+      action space for controlling egocentric, embodied agents, a waypoint-conditioned
+      policy that predicts sequences of low-level joint actions, and the combination
+      of these two with a low-level world model to form a Lifted World Model (LWM)
+      for planning.
     </p>
 
-    <h3 class="reveal" id="waypoints">Waypoint actions</h3>
+    <h3 class="reveal" id="waypoints">High-level Waypoint Actions</h3>
     <p class="reveal">
-      A <strong>waypoint</strong> is the 2D projection into the current observation
-      <em>o<sub>t</sub></em> of a near-term 3D goal position for one leaf joint of the
-      embodied agent. For the human-like XSens embodiment used by
-      <a href="https://dannytran123.github.io/PEVA/" target="_blank">PEVA</a>,
-      we use four waypoints — <span class="wp-pelvis">pelvis</span>,
-      <span class="wp-head">head</span>, <span class="wp-left-hand">left&nbsp;hand</span>,
-      <span class="wp-right-hand">right&nbsp;hand</span> — annotated directly on the
-      current frame. The action is 8-dimensional vs. the 48-dimensional joint action
-      space, finite, visually interpretable, and well-suited to search.
+      A waypoint is the 2D projection into the current observation
+      <em>o<sub>t</sub></em> of a near-term 3D goal position for one leaf joint of
+      the embodied agent. For the human XSens embodiment, we use one waypoint for
+      each leaf joint (<span class="wp-pelvis">pelvis</span>,
+      <span class="wp-head">head</span>,
+      <span class="wp-left-hand">left&nbsp;hand</span>,
+      <span class="wp-right-hand">right&nbsp;hand</span>) that are annotated directly
+      on the current frame. We use a goal 8 timesteps (2 seconds) into the future.
+      This reduces the action dimensionality from 8 timesteps &times; 48 dimensions
+      for <a href="https://dannytran123.github.io/PEVA/" target="_blank">PEVA</a>
+      to just 4 &times; 2 = 8 dimensions for our high-level action space.
     </p>
     <p class="reveal">
       During training, ground-truth waypoints are obtained by projecting the goal pose
@@ -990,34 +1006,35 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       <div class="figure flat">
         <img src="/assets/img/lwm/fig2_waypoints.png" alt="Specifying goals using waypoints">
         <div class="figure-caption">
-          <strong>Fig. 2: Specifying goals using waypoints.</strong> A subset of joints
-          from goal pose <em>p<sub>g</sub></em> is drawn as waypoints on the current
+          <strong>Fig. 2: Specifying goals using waypoints.</strong> Leaf joints from
+          goal pose <em>p<sub>g</sub></em> are drawn as waypoints on the current
           observation <em>o<sub>t</sub></em> to create the annotated frame
-          <em>o</em><sup>ann</sup><sub>t</sub>. From the agent's egocentric view, the
-          body itself is rarely visible, so a goal observation <em>o<sub>g</sub></em>
-          provides little pose information — waypoints make the goal explicit.
+          <em>o</em><sup>ann</sup><sub>t</sub>. Note how the goal pose
+          <em>p<sub>g</sub></em> is not obvious from goal observation
+          <em>o<sub>g</sub></em>.
         </div>
       </div>
       <div class="figure flat">
         <img src="/assets/img/lwm/fig3_projection.png" alt="Projecting goal pose into the current observation">
         <div class="figure-caption">
-          <strong>Fig. 3: Waypoint projection.</strong> Ground-truth waypoints during
-          training are obtained by forward-kinematics-projecting the leaf joints of the
-          goal pose <em>p<sub>g</sub></em> through the egocentric camera matrix onto
-          observation <em>o<sub>t</sub></em>.
+          <strong>Fig. 3: Waypoint projection.</strong> Ground-truth waypoints are
+          obtained by projecting leaf joints of the goal pose <em>p<sub>g</sub></em>
+          (left-back) onto observation <em>o<sub>t</sub></em> seen from the current
+          pose <em>p<sub>t</sub></em> (right-front).
         </div>
       </div>
     </div>
 
-    <h3 class="reveal" id="policy">Goal-conditioned policy</h3>
+    <h3 class="reveal" id="policy">Goal-Conditioned Policy</h3>
     <p class="reveal">
-      A diffusion policy maps the goal-annotated frame plus pose context to a sequence
-      of <em>T</em>=8 low-level joint actions. Images and the annotated goal frame are
-      encoded by DINOv3 without spatial pooling; pose context is added by linear
-      projection. <strong>Waypoint masking</strong> during training (each waypoint
-      independently masked with prob. 0.5 half the time) lets the policy handle sparse
-      or out-of-frame inputs at inference and infer missing joint positions from scene
-      context.
+      Conditioned on the high-level waypoint action, the policy uses image and pose
+      context to infer a meaningful sequence of <em>T</em>=8 low-level joint actions.
+      The policy makes use of observation and pose context as well as the relative
+      spacing of the waypoints to infer a 3D goal pose. We also use
+      waypoint masking during training, where waypoints are
+      randomly masked to have the policy infer goal positions when waypoints are
+      missing. This allows the policy to handle sparse goals at inference, for
+      example specifying only a pelvis waypoint for navigation.
     </p>
 
     <div class="figure reveal r4-narrow" id="r4-fig">
@@ -1106,23 +1123,23 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
     </div>
 
-    <h3 class="reveal" id="lwm">Lifted World Model and search</h3>
+    <h3 class="reveal" id="lwm">Lifted World Model and Search</h3>
     <p class="reveal">
-      Composing the policy with the frozen low-level world model yields the LWM, which
-      predicts <em>o<sub>t+T</sub></em> from <em>o<sub>t</sub></em>, pose context, and
-      a single high-level action. We run CEM in the high-level action space: sample
-      waypoints, simulate forward with the LWM, score by perceptual distance to the
-      goal observation, and refit the prior to the lowest-cost samples.
+      Composing the policy with the frozen low-level world model yields the LWM,
+      which predicts <em>o<sub>t+T</sub></em> from <em>o<sub>t</sub></em>, pose
+      context, and a single high-level action. With the LWM we can run CEM planning
+      in high-level action space by sampling waypoints, simulating the predicted
+      goal observation, and updating the prior using the lowest-cost samples.
     </p>
 
     <div class="figure flat shrink reveal">
       <img src="/assets/img/lwm/fig5_planning.png" alt="Planning using the Lifted World Model">
       <div class="figure-caption">
-        <strong>Fig. 5: Planning with the LWM.</strong> The action prior, sampling, and
-        distribution updates all occur in the small high-level action space; the policy
-        translates the selected high-level action to joint actions for execution.
-        Planning with the low-level world model directly searches in the 48-dimensional
-        joint space.
+        <strong>Fig. 5: CEM Planning with the LWM.</strong> The action prior,
+        sampling, and distribution updates all occur in the high-level action space.
+        The policy translates the selected high-level action to joint actions for
+        execution. Planning with the low-level world model directly searches in the
+        48-dimensional joint space.
       </div>
     </div>
   </div>
@@ -1139,14 +1156,19 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       reported for leaf joints, intermediate joints, and all joints together.
     </p>
 
-    <h3 class="reveal" id="policy-results">Goal-conditioned policy</h3>
+    <h3 class="reveal" id="policy-results">Goal-Conditioned Policy</h3>
     <p class="reveal">
-      Conditioning on a goal observation <em>o<sub>g</sub></em> barely steers the policy
-      toward the goal pose: a NoMaD-style baseline reduces all-MJE by only 1.3&nbsp;cm
-      over an unconditioned baseline. <strong class="hl">Waypoints are an effective
-      goal-conditioning signal</strong>: adding waypoint conditioning improves
-      goal-conditioned all-MJE by <strong>8.8&nbsp;cm</strong> over unconditioned
-      generation, and waypoint masking gives an additional 1.8&nbsp;cm.
+      We evaluate the policy on both unconditioned (no goal information) and
+      goal-conditioned action generation. Conditioning on a goal observation
+      <em>o<sub>g</sub></em> barely improves MJE: the NoMaD-style baseline reduces
+      MJE by only 1.3&nbsp;cm over the unconditioned baseline. In comparison,
+      <strong>waypoints are an effective goal-conditioning signal</strong>;
+      waypoint conditioning improves goal-conditioned all-MJE by
+      <strong>8.8&nbsp;cm</strong> over unconditioned generation. Waypoint masking
+      further improves goal-conditioned performance by teaching the model to infer
+      a goal position when a waypoint is not visible. Moving forward, we use the
+      waypoint-masking model, since lifting the world model relies on strong
+      waypoint goal-conditioning.
     </p>
 
     <div class="table-wrap reveal">
@@ -1183,10 +1205,10 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
     </div>
 
     <p class="reveal" style="margin-top:1.5rem">
-      Qualitatively, the policy responds sensibly to <strong>counterfactual</strong>
-      waypoints not present in the data and uses <strong>scene context</strong> to
-      interpret the same waypoints differently — grasping a pot in front of a stove
-      vs. walking forward in an open room.
+      Qualitatively, the policy generalizes well to <strong>counterfactual</strong>
+      waypoints not present in the data. It is also context sensitive: the policy
+      can use image and pose context to generate sensible actions in different
+      scenarios using the same waypoints.
     </p>
 
     <div class="figure reveal" id="cf-fig">
@@ -1248,13 +1270,10 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
 
       <div class="figure-caption">
-        <strong>Fig. 6: Counterfactual waypoints.</strong> Three example inputs scrubbed
-        in lockstep. The ground-truth waypoints (left) recover the recorded action
-        sequence; counterfactual waypoints not present in the data — a single
-        <span class="wp-head">head</span> waypoint to the right ("Shift to the right"),
-        or four waypoints positioned above a bench ("Climbing onto the bench") —
-        still produce reasonable motions. The policy treats waypoints as compositional
-        goal cues, not memorized prompts.
+        <strong>Fig. 6: Counterfactual waypoints.</strong> Given counterfactual
+        waypoints not present in the data, the policy still generates sensible
+        actions. Pick an example, then drag the slider to scrub through the eight
+        rollout steps.
       </div>
     </div>
 
@@ -1308,12 +1327,13 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
     </div>
 
-    <h3 class="reveal" id="planning-results">Lifted World Model planning</h3>
+    <h3 class="reveal" id="planning-results">Lifted World Model Planning</h3>
     <p class="reveal">
-      We sample 128 hybrid navigation + interaction tasks from Nymeria and compare
-      direct CEM in the joint action space (<strong>PEVA CEM</strong>) against CEM in
-      waypoint space using our LWM (<strong>Lifted CEM</strong>). PEVA CEM reduces
-      all-MJE by only 8.8&nbsp;cm; Lifted CEM reduces it by <strong>33&nbsp;cm</strong>.
+      We perform search-based planning using our LWM. We sample 128 hybrid
+      navigation + interaction tasks from Nymeria and compare direct CEM in the
+      joint action space (<strong>PEVA CEM</strong>) against CEM in waypoint space
+      using our LWM (<strong>Lifted CEM</strong>). PEVA CEM reduces all-MJE by only
+      8.8&nbsp;cm; <strong>Lifted CEM reduces it by 33&nbsp;cm</strong>.
     </p>
 
     <div class="table-wrap reveal">
@@ -1464,14 +1484,9 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
 
       <div class="figure-caption">
-        <strong>Fig. 8: Planning rollouts.</strong> Two CEM iterations on different
-        tasks. Each frame compares the ground-truth action sequence (top) against
-        the LWM-planned sequence (bottom): current observation, actions on the
-        skeleton, predicted observations, and the goal. Pick an example, then drag
-        the slider to scrub through the eight rollout steps. The policy ignores
-        outlier waypoints found by search and still drives the agent toward the
-        goal — and unlike PEVA CEM, the lifted-policy actions stay in the
-        realistic-motion manifold.
+        <strong>Fig. 8: Planning rollouts.</strong> Action sequences and observations
+        from CEM planning, compared against the ground-truth recorded sequence. Pick
+        an example, then drag the slider to scrub through the eight rollout steps.
       </div>
     </div>
 
@@ -1491,19 +1506,14 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
       </div>
     </div>
 
-    <h3 class="reveal" id="horizons">Varying goal horizons</h3>
+    <h3 class="reveal" id="horizons">Varying Goal Horizons</h3>
     <p class="reveal">
-      The policy was trained to decode <em>T</em>=8 low-level actions per high-level
-      action, but planning tasks span goals from 6 to 20 timesteps in the future. PEVA
-      CEM is allowed to vary its plan length to match the horizon; Lifted CEM is locked
-      at <em>T</em>=8 by construction.
-    </p>
-    <p class="reveal">
-      <strong>Lifted CEM beats PEVA CEM at every horizon</strong>, even on horizons it
-      was never trained for — the high-level action space stays useful well beyond the
-      training distribution, and longer-horizon tasks become a sequence of waypoint
-      decisions rather than a longer search over joint actions. Performance gracefully
-      degrades with goal distance for both methods, but the gap stays consistent.
+      We compare Lifted CEM and PEVA CEM when goals are sampled from varying time
+      horizons and at varying distances. PEVA CEM is allowed to vary its plan
+      length to match the horizon; Lifted CEM only predicts 8 timesteps, the fixed
+      length of our pretrained policy. We find that Lifted CEM performs better on
+      both goals sampled from longer time horizons as well as when the goal pose
+      is further away.
     </p>
 
     <div class="figure-row reveal">
@@ -1520,8 +1530,8 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
         <div class="figure-caption">
           <strong>Fig. 11: Initial distance.</strong> MJE vs. initial distance to goal
           (20 quantile buckets). The dashed <em>y=x</em> line is the no-action baseline.
-          Lifted CEM stays clearly below at most distances; both methods struggle when
-          the agent already starts within ~0.3&nbsp;m of the goal.
+          Lifted CEM consistently outperforms PEVA CEM while both methods show
+          difficulty at initial MJE &le; 0.3&nbsp;m.
         </div>
       </div>
     </div>
@@ -1533,21 +1543,15 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
   <div class="section" id="takeaways">
     <h2 class="reveal">Takeaway</h2>
     <p class="reveal">
-      A small waypoint-conditioned policy is enough to <strong>lift a frozen low-level
-      world model</strong> into a low-dimensional, visually interpretable action space —
-      no re-training of the world model, no new data. In the lifted space, search-based
-      planning becomes practical: 8-d waypoint search produces solutions 3.8&times; closer
-      to the goal than 48-d joint-space search at every compute budget tested, and the
-      advantage holds across goal horizons well beyond the policy's training length.
-      For egocentric, embodied agents, waypoints also turn out to be a far stronger
-      goal-conditioning signal than goal images, since the body is rarely visible in the
-      agent's own view.
-    </p>
-    <p class="reveal">
-      The recipe — pair a powerful low-level world model with a small policy that decodes
-      a useful high-level abstraction — is general. Wherever such an abstraction exists,
-      lifting unlocks search-based planning at a scale the low-level action space cannot
-      support.
+      We present a method for lifting low-level world models to a higher level of
+      abstraction by training a lightweight policy that maps high-level actions to
+      sequences of low-level actions, and instantiate it for a human-like
+      embodiment using waypoints. Our approach is lightweight, requires no
+      additional data, and works with off-the-shelf world models. Search-based
+      planning with the resulting LWM is <strong>3.8&times; more effective</strong>
+      than planning in low-level joint space at lower compute, and we believe
+      lifting is a promising direction for keeping world models controllable and
+      plannable as they scale.
     </p>
   </div>
 
@@ -1634,11 +1638,11 @@ tr.rhl td.r { font-weight: 600; color: var(--accent); }
   var tabs = root.querySelectorAll('.carousel-tab');
   var capEl = document.getElementById('lwm-carousel-caption');
   var captions = [
-    '<strong>Fig. 1: Lifted World Model overview.</strong> Input → policy → low-level actions → frozen low-level world model → future observations, all visible together.',
-    '<strong>Fig. 1: Input.</strong> The current observation <em>o<sub>t</sub></em> annotated with four 2D waypoints (one per leaf joint), plus the recent observation and pose context, all conditioned on a single high-level action <em>a</em><sup>HL</sup>.',
-    '<strong>Fig. 1: Actions.</strong> The waypoint-conditioned policy decodes <em>T</em> low-level joint actions <em>a</em><sup>LL</sup><sub>t:t+T−1</sub> in one shot.',
-    '<strong>Fig. 1: Observations.</strong> The frozen low-level world model autoregressively rolls those joint actions forward into a sequence of <em>T</em> future observations.',
-    '<strong>Fig. 1: Output.</strong> The predicted observation <em>o<sub>t+T</sub></em> — what the world will look like <em>T</em> steps after the chosen high-level action.'
+    '<strong>Fig. 1: Lifted World Model overview.</strong> A high-level action <em>a</em><sup>HL</sup> is mapped by the policy into a sequence of low-level joint actions, which the frozen low-level world model rolls out into a sequence of observations. The final observation <em>o<sub>t+T</sub></em> is the output of the LWM. Meshes are shown for visualization only.',
+    '<strong>Fig. 1: Input.</strong> The high-level waypoint actions <em>a</em><sup>HL</sup> are plotted onto the current observation <em>o<sub>t</sub></em> to provide goal conditioning to the policy.',
+    '<strong>Fig. 1: Actions.</strong> The policy predicts sequences of low-level joint actions <em>a</em><sup>LL</sup><sub>t:t+T−1</sub>. Actions are visualized by plotting the pose after each action is taken.',
+    '<strong>Fig. 1: Observations.</strong> The low-level world model generates the observation seen by the agent after each action. Each observation is appended into the context for the low-level world model.',
+    '<strong>Fig. 1: Output.</strong> The final output of the LWM is the last observation <em>o<sub>t+T</sub></em> generated from the sequence of actions.'
   ];
   function goto(step) {
     imgs.forEach(function(im, i) { im.classList.toggle('active', i === step); });
