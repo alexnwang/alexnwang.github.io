@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-05-01'
+  last_updated: '2026-05-04'
 papers:
   X0n8TX0AAAAJ:UeHWp8X0CEIC:
     citations: 0
@@ -17,3 +17,7 @@ papers:
     citations: 37
     title: 'Sketchembednet: Learning novel concepts by imitating drawings'
     year: '2021'
+  X0n8TX0AAAAJ:ufrVoPGSRksC:
+    citations: 0
+    title: Lifting Embodied World Models for Planning and Control
+    year: '2026'
