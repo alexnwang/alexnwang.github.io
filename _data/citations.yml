@@ -1,5 +1,5 @@
 metadata:
-  last_updated: '2026-05-04'
+  last_updated: '2026-05-11'
 papers:
   X0n8TX0AAAAJ:UeHWp8X0CEIC:
     citations: 0
@@ -7,8 +7,8 @@ papers:
     year: Unknown Year
   X0n8TX0AAAAJ:WF5omc3nYNoC:
     citations: 7
-    title: 'Poodle: Pooled and dense self-supervised learning from naturalistic videos'
-    year: '2024'
+    title: "PooDLe\U0001F429: Pooled and dense self-supervised learning from naturalistic videos"
+    year: '2025'
   X0n8TX0AAAAJ:YsMSGLbcyi4C:
     citations: 7
     title: Self-supervised learning of video representations from a child's perspective
