@@ -34,7 +34,7 @@ social: true # includes social icons at the bottom of the page
 announcements:
   enabled: true # includes a list of news items
   scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-  limit: 3 # leave blank to include all the news in the `_news` folder
+  limit: 8 # leave blank to include all the news in the `_news` folder
 ---
 
 I'm a PhD candidate at NYU [CILVR](https://wp.nyu.edu/cilvr/), advised by [Pavel Izmailov](https://izmailovpavel.github.io) and collaborating with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
