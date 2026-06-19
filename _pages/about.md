@@ -37,7 +37,7 @@ announcements:
   limit: 3 # leave blank to include all the news in the `_news` folder
 ---
 
-I'm a 4th year CS PhD at NYU [CILVR](https://wp.nyu.edu/cilvr/), advised by [Pavel Izmailov](https://izmailovpavel.github.io) and collaborating with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
+I'm a PhD candidate at NYU [CILVR](https://wp.nyu.edu/cilvr/), advised by [Pavel Izmailov](https://izmailovpavel.github.io) and collaborating with [Yutong Bai](https://yutongbai.com/) and [Amir Bar](https://www.amirbar.net/).
 
 I'm interested in vision, representations, world models and planning.
 Specifically:
