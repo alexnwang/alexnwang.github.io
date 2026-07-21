@@ -1092,7 +1092,9 @@ description: "A method for lifting low-level world models to higher-level action
           <a href="https://www.amirbar.net/" target="_blank">Amir Bar</a><sup>3,&dagger;</sup>
         </div>
         <div class="equal-note"><sup>&dagger;</sup>Equal advising</div>
-        <div class="affil"><sup>1</sup>New York University &nbsp;&middot;&nbsp; <sup>2</sup>BAIR, UC Berkeley &nbsp;&middot;&nbsp; <sup>3</sup>Imperial College London</div>
+        <div class="affil">
+          <sup>1</sup>New York University &nbsp;&middot;&nbsp; <sup>2</sup>BAIR, UC Berkeley &nbsp;&middot;&nbsp; <sup>3</sup>Imperial College London
+        </div>
         <div class="btn-row">
           <a href="https://arxiv.org/abs/2604.26182" target="_blank" class="btn"
             ><i class="ai ai-arxiv" style="font-size: 1.1em; vertical-align: -0.05em"></i> arXiv</a
@@ -1239,9 +1241,9 @@ description: "A method for lifting low-level world models to higher-level action
         <h3 class="reveal" id="policy">Goal-Conditioned Policy</h3>
         <p class="reveal">
           Conditioned on a high-level waypoint action, the policy uses image and pose context to infer a meaningful sequence of <em>T</em>=8 low-level
-          joint actions. The policy uses this context and the relative spacing of the waypoints to infer and move towards a 3D goal pose. During
-          training, we randomly mask waypoints to teach the policy to infer reasonable goals for the unconditioned leaf joints. This improves
-          performance and allows the policy to handle sparse goals at inference time, for example, specifying only a pelvis waypoint for navigation.
+          joint actions. The policy uses this context and the relative spacing of the waypoints to infer and move towards a 3D goal pose. It also
+          handles sparse or out-of-frame waypoints &mdash; for example, specifying only a pelvis waypoint for navigation &mdash; inferring the
+          unspecified joint targets from context.
         </p>
 
         <div class="figure reveal r4-narrow" id="r4-fig">
@@ -1361,9 +1363,9 @@ description: "A method for lifting low-level world models to higher-level action
           observation
           <em>o<sub>g</sub></em> barely improves MJE: the NoMaD-style baseline reduces all-MJE by only 1.3&nbsp;cm over unconditioned generation. In
           comparison, <strong>waypoints are an effective goal-conditioning signal</strong>; waypoint conditioning improves goal-conditioned all-MJE by
-          <strong>8.8&nbsp;cm</strong> over unconditioned generation. Waypoint masking further improves goal-conditioned performance by teaching the
-          model to infer a goal position when a waypoint is not visible. Moving forward, we use the waypoint-masking model, because lifting the world
-          model relies on strong waypoint goal-conditioning.
+          <strong>8.8&nbsp;cm</strong> over unconditioned generation. Removing goal masking further improves goal-conditioned performance, at the cost
+          of unconditioned MJE. Since we prioritize goal-conditioned generation to lift the world model, we adopt this no-masking policy going
+          forward.
         </p>
 
         <div class="table-wrap reveal">
@@ -1443,7 +1445,7 @@ description: "A method for lifting low-level world models to higher-level action
                 <td class="r">0.243</td>
               </tr>
               <tr>
-                <td class="label indent">+ waypoint masking</td>
+                <td class="label indent">+ no masking</td>
                 <td class="r">0.437</td>
                 <td class="r">0.408</td>
                 <td class="r">0.415</td>
@@ -1471,7 +1473,8 @@ description: "A method for lifting low-level world models to higher-level action
             <div class="cf-pair-label">Climbing onto the bench</div>
           </div>
           <div class="cf-sub-labels">
-            <span>Input</span><span>Predicted Action</span> <span>Input</span><span>Predicted Action</span> <span>Input</span><span>Predicted Action</span>
+            <span>Input</span><span>Predicted Action</span> <span>Input</span><span>Predicted Action</span> <span>Input</span
+            ><span>Predicted Action</span>
           </div>
           <div class="cf-stage">
             <div class="cf-cell cf-input">
@@ -1577,7 +1580,8 @@ description: "A method for lifting low-level world models to higher-level action
           We perform search-based planning using our LWM. We sample 128 hybrid navigation + interaction tasks from Nymeria and compare direct CEM in
           the joint action space (<strong>PEVA CEM</strong>) against CEM in the high-level waypoint space using our Lifted World Model (<strong
             >Lifted CEM</strong
-          >). PEVA CEM reduces all-MJE by only 8.8&nbsp;cm while <strong>Lifted CEM reduces it by 33&nbsp;cm</strong>.
+          >). PEVA CEM reduces all-MJE by only 8.8&nbsp;cm while <strong>Lifted CEM reduces it by 33&nbsp;cm</strong>. Lifted CEM also beats every
+          policy-only baseline (unconditioned, image-conditioned, and hierarchical) and a variant that searches over 3D waypoints instead of 2D.
         </p>
 
         <div class="table-wrap reveal">
@@ -1602,23 +1606,35 @@ description: "A method for lifting low-level world models to higher-level action
                 <td class="r">0.697</td>
                 <td class="r">0.704</td>
               </tr>
-              <tr class="baseline">
+              <tr class="section-break">
                 <td class="label">Unconditioned policy</td>
                 <td class="r">0.677</td>
                 <td class="r">0.641</td>
                 <td class="r">0.650</td>
               </tr>
-              <tr class="section-break">
-                <td class="label">Image-cond. policy</td>
+              <tr>
+                <td class="label">Image-cond. policy (NoMaD)</td>
                 <td class="r">0.605</td>
                 <td class="r">0.578</td>
                 <td class="r">0.585</td>
               </tr>
               <tr>
+                <td class="label">Hierarchical policy (HDP)</td>
+                <td class="r">0.540</td>
+                <td class="r">0.502</td>
+                <td class="r">0.512</td>
+              </tr>
+              <tr class="section-break">
                 <td class="label">PEVA CEM (joint space)</td>
                 <td class="r">0.637</td>
                 <td class="r">0.608</td>
                 <td class="r">0.616</td>
+              </tr>
+              <tr>
+                <td class="label">Lifted CEM (3D waypoints)</td>
+                <td class="r">0.453</td>
+                <td class="r">0.407</td>
+                <td class="r">0.420</td>
               </tr>
               <tr class="bold-row">
                 <td class="label">Lifted CEM (ours)</td>
